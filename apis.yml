@@ -1,7 +1,16 @@
 aid: probablymonsters
 name: ProbablyMonsters
-description: 'ProbablyMonsters is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  ProbablyMonsters Inc. is an independent video game company headquartered in Bellevue,
+  Washington, with a second location in Fort Worth, Texas. Founded in 2016 by former Bungie
+  CEO Harold Ryan, it operates as a parent company that founds, funds and incubates
+  development teams building AAA and AA interactive entertainment — publishing titles
+  including Crimson Moon, Storm Lancers, IRE: A Prologue and Nekome. ProbablyMonsters sells
+  finished games to players through console and PC storefronts; it is not a platform or
+  developer-tools business. It publishes no developer program, no public API, no SDK and no
+  machine-readable API description, and its GitHub organization carries zero public
+  repositories. This profile records that absence with the probes behind it.
+image: https://www.probablymonsters.com/probablymonsters-meta-primary.jpg
 url: https://raw.githubusercontent.com/api-evangelist/probablymonsters/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
@@ -12,6 +21,12 @@ created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
+- Video Games
+- Game Development
+- Game Studios
+- Interactive Entertainment
+- Entertainment
+- Media
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +34,41 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/probablymonsters-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/probablymonsters_stock/
+  url: https://www.probablymonsters.com/
+- type: Support
+  url: https://support.probablymonsters.com
+- type: TermsOfService
+  url: https://www.probablymonsters.com/en/terms/
+- type: PrivacyPolicy
+  url: https://www.probablymonsters.com/en/privacy/
+- type: GitHubOrganization
+  url: https://github.com/ProbablyMonsters
+x-enrichment:
+  date: '2026-08-26'
+  status: minimal
+  artifacts_added: 2
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    ProbablyMonsters ships finished console and PC games to players and nothing else — its
+    entire public site is About, Careers, News and four game pages, its GitHub organization
+    has zero public repositories, api/developer/docs subdomains do not resolve, and every
+    contract-discovery path (/openapi.json, /swagger.json, /graphql, /llms.txt,
+    /.well-known/*) returns a real 404 on the corporate host.
+  evidence:
+  - url: https://www.probablymonsters.com/openapi.json
+    status: 404
+  - url: https://www.probablymonsters.com/llms.txt
+    status: 404
+  - url: https://www.probablymonsters.com/.well-known/agent-card.json
+    status: 404
+  - url: https://api.github.com/orgs/ProbablyMonsters/repos
+    status: 200
+  - url: https://www.probablymonsters.com/en/about/
+    status: 200
+  checked: '2026-08-26'

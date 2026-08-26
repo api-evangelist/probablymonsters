@@ -1,0 +1,79 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Direct unauthenticated HTTP probes of every ProbablyMonsters-controlled host found in
+  STEP 0b contract discovery (the corporate site plus the two game domains it owns).
+name: ProbablyMonsters .well-known probe
+description: >-
+  Record of the /.well-known/ discovery probe run against every host ProbablyMonsters
+  controls. Every path returned a real 404 on the corporate host. The two game domains
+  (stormlancers.com, playire.com) are JS redirect stubs that answer HTTP 200 with a
+  142-byte location.href shim for EVERY path, so their 200s are catch-all shells and are
+  recorded as misses, not documents. No .well-known document is served anywhere, so no
+  WellKnown or SecurityTxt pointer is emitted in apis.yml.
+hosts:
+- host: www.probablymonsters.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: www.stormlancers.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: >-
+      Not a document. The host is a 142-byte JS redirect stub that answers 200 with
+      location.href="/en/stormlancers/" for every path, including paths that cannot exist.
+      Treated as a miss per the SPA catch-all rule.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: Same catch-all redirect shell as above; not an agent card.
+- host: playire.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: >-
+      Not a document. 124-byte JS redirect stub answering 200 with
+      location.href="/en/ire/" for every path. Treated as a miss.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: Same catch-all redirect shell as above; not an agent card.
+- host: support.probablymonsters.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+    note: >-
+      Zendesk-hosted support portal (CNAME probablymonsters.zendesk.com) behind a
+      Cloudflare interstitial. Not probeable without evading a challenge, which we do not
+      do. The portal is a third-party hosted surface, not a ProbablyMonsters-served host.
+x-probe:
+  checked: '2026-08-26'
+  hosts_probed: 4
+  documents_served: 0
+  soft_200_catch_alls: 2
